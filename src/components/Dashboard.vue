@@ -1,5 +1,5 @@
 <template>
-    <div id="burger-table">
+    <div id="burger-table" v-if="burgers">
         <div>
             <div id="burger-table-heading">
                 <div class="order-id">#:</div>
@@ -17,33 +17,40 @@
         <div>{{burger.pao}}</div>
         <div>{{burger.carne}}</div>
         <div>
-            <ul>
-                <li v-for="(opcional, index) in burger.opcionais" :key="index">
-                    {{opcional}}
-                </li>
+            <ul v-for="(opcional, index) in burger.opcionais" :key="index">
+                <li> {{opcional}}</li>
             </ul>
         </div>
-        </div>
-        <select name="status" class="status">
-            <option value="">Selecione</option>
-            <option v-for="s in status" :key="s.id" value="s.tipo" :selected="burger.status == s.tipo">
+        <div>
+        <select name="status" class="status" @change="updateBurger($event, burger.id)">
+            <option :value="s.tipo" v-for="s in status" :key="s.id"  :selected="burger.status == s.tipo">
                 {{s.tipo}}
             </option>
         </select>
         <button class="delete-btn" @click="deleteBurger(burger.id)">Cancelar</button>
         </div>
+        </div>
+        </div>
+        </div>
+        <div v-else>
+        <h2>Não pedidos no momento</h2>
     </div>
 </template>
 
 <script>
+import Message from './Message.vue';
 export default {
     name: "Dashboard",
     data(){
         return {
             burgers: null,
             burger_id: null,
-            status: []
+            status: [],
+            msg: null
         }
+    },
+    components: {
+        Message
     },
     methods: {
         async getPedidos(){
@@ -71,7 +78,30 @@ export default {
 
             const res = await req.json();
 
+            //Colocar uma msg de sistema
+            this.msg = `Pedido removido com sucesso`;
+            //Limpar msg
+            setTimeout(() => this.msg="", 3000);
+
             this.getPedidos();
+        },
+        async updateBurger(event, id){
+            const option = event.target.value;
+
+            const dataJson = JSON.stringify({ status: option});
+
+            const req = await fetch(`https://localhost:3000/burgers/${id}`, {
+                method: "PATCH",
+                headers: {"Content-Type": "application/json"},
+                body: dataJson
+            });
+
+            const res = await req.json();
+            //Colocar uma msg de sistema
+            this.msg = `O Pedido Nº ${res.id} foi atualizado para ${res.status}!`;
+            //Limpar msg
+            setTimeout(() => this.msg="", 3000);
+
         }
     },
     mounted(){
@@ -98,16 +128,18 @@ export default {
     border-bottom: 3px solid #333;
 }
 
-#burger-table-heading div,
-.burger-table-row div {
-    width: 19%;
-}
-
 .burger-table-row {
     width: 100%;
     padding: 12px;
     border-bottom: 1px solid #ccc;
 }
+
+#burger-table-heading div,
+.burger-table-row div {
+    width: 12%;
+    padding: 12px;
+}
+
 
 #burger-table-heading .order-id,
 .burger-table-row .order-number {
@@ -125,7 +157,7 @@ select {
     font-weight: bold;
     border: 2px solid #222;
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
     margin: 0 auto;
     cursor: pointer;
     transition: .5s;

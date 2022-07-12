@@ -1,7 +1,7 @@
 <template>
-<footer id="footer">
+<div id="footer">
     <p>Make Your Burger &copy; 2021</p>
-    </footer>
+    </div>
 </template>
 
 <script>
@@ -20,6 +20,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    bottom: 0;
     width: 100%;
 }
 </style>

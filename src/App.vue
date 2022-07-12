@@ -1,7 +1,11 @@
 <template>
+<div>
   <Navbar :logo="logo_src" :alt="app_name" />
-  <router-view/>
+  <div>
+  <router-view></router-view>
+  </div>
   <Footer />
+  </div>
 </template>
 
 <script>
@@ -13,7 +17,7 @@ export default{
     Navbar,
     Footer
   },
-  data(){
+  data: function(){
     return {
       logo_src: "/img/logo.png",
       app_name: "Make Your Burguer"

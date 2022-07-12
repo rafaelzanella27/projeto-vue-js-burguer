@@ -1,5 +1,4 @@
 <template>
-    <div>
         <Message :msg="msg" v-show="msg"/>
         <div>
           <form id="burger-form" method="POST" @submit="createBurger">
@@ -29,12 +28,10 @@
                     </div>
                   </div>
                   <div class="input-container">
-                    <input type="submit" class="submit-btn" value="criar meu Burger!">
+                    <input class="submit-btn" type="submit" value="criar meu Burger!">
                   </div>
           </form>
     </div>
-    </div>
-    
 </template>
 
 <script>
@@ -85,14 +82,15 @@ export default {
             
             const res = await req.json();
 
+            //Colocar uma msg de sistema
             this.msg = `Pedido N° ${res.id} realizado com sucesso`;
-
+            //Limpar msg
             setTimeout(() => this.msg="", 3000);
 
-            this.nome = "";
-            this.carne = "";
-            this.pao = "";
-            this.opcionais = "";
+            this.nome = ""
+            this.carne = ""
+            this.pao = ""
+            this.opcionais = []
         }
     },
         

@@ -1,8 +1,10 @@
 <template>
+<div>
 <Banner />
   <div class="main-container">
     <h1>Monte o seu burguer:</h1>
     <BurgerForm />
+  </div>
   </div>
 </template>
 

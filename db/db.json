@@ -79,17 +79,6 @@
   ],
   "burgers": [
     {
-      "nome": "Rafael Zanella",
-      "carne": "Maminha",
-      "pao": "3 Queijos",
-      "opcionais": [
-        "Bacon",
-        "Salame"
-      ],
-      "status": "Solicitado",
-      "id": 1
-    },
-    {
       "nome": "Guilherme",
       "carne": "Picanha",
       "pao": "Parmesão e Orégano",
@@ -99,17 +88,6 @@
       ],
       "status": "Solicitado",
       "id": 2
-    },
-    {
-      "nome": "maria",
-      "carne": "Alcatra",
-      "pao": "3 Queijos",
-      "opcionais": [
-        "Bacon",
-        "Cheddar"
-      ],
-      "status": "Solicitado",
-      "id": 3
     },
     {
       "nome": "Joaquina",
@@ -131,6 +109,17 @@
       ],
       "status": "Solicitado",
       "id": 5
+    },
+    {
+      "nome": "Jose",
+      "carne": "Veggie burger",
+      "pao": "Integral",
+      "opcionais": [
+        "Salame",
+        "Cebola roxa"
+      ],
+      "status": "Solicitado",
+      "id": 6
     }
   ]
 }
